@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "virtualflightonlinetransmitter.fullname" . }}
+  labels:
+    {{- include "virtualflightonlinetransmitter.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "virtualflightonlinetransmitter.selectorLabels" . | nindent 4 }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "virtualflightonlinetransmitter.fullname" . }}
+  labels:
+    {{- include "virtualflightonlinetransmitter.labels" . | nindent 4 }}
+  annotations:
+    {{- with .Values.ingress.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  rules:
+    - host: {{ .Values.ingress.hostname }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "virtualflightonlinetransmitter.fullname" . }}
+                port:
+                  name: http
+  tls:
+    {{- with .Values.ingress.tls }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+{{- if .Capabilities.APIVersions.Has "traefik.io/v1alpha1" }}
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ include "virtualflightonlinetransmitter.fullname" . }}-block-apcu-manager
+  labels:
+    {{- include "virtualflightonlinetransmitter.labels" . | nindent 4 }}
+spec:
+  plugin:
+    plugin-blockpath:
+      Regex:
+        - ^/apcu_manager(.*)
+{{- end }}
