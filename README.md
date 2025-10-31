@@ -1,3 +1,11 @@
+# Chris's Docker fork
+
+This is a fork of the [original repo](https://github.com/jonbeckett/virtualflightonlinetransmitter) where I've Dockerised it so I can deploy it easily to my pet k8s cluster.
+
+If you want to just quickly deploy a Docker version of the server: `docker run --rm -p 8000:80 ghcr.io/cnorthwood/virtualflightonlinetransmitter:latest` and it's running on port 8000.
+
+Original readme is below 👇
+
 # Virtual Flight Online Transmitter
 
 ## Where do I download the Transmitter installer from?
