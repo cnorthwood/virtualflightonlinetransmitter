@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);  
 
 // Server pin for authentication (set this to secure your endpoint)
-$server_pin = ""; // Leave empty to disable pin authentication
+$server_pin = $_ENV["server_pin"]; // Leave empty to disable pin authentication
 
 // Debug mode
 $debug = isset($_REQUEST['debug']) ? true : false;

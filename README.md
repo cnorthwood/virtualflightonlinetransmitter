@@ -4,6 +4,8 @@ This is a fork of the [original repo](https://github.com/jonbeckett/virtualfligh
 
 If you want to just quickly deploy a Docker version of the server: `docker run --rm -p 8000:80 ghcr.io/cnorthwood/virtualflightonlinetransmitter:latest` and it's running on port 8000.
 
+If you want to protect the server with a PIN, pass `-e server_pin=hunter2` to set the env var server_pin which will set the PIN.
+
 Original readme is below 👇
 
 # Virtual Flight Online Transmitter
