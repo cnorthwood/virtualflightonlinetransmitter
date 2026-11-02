@@ -1,0 +1,25 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "enabledManagers": ["dockerfile", "github-actions"],
+  "packageRules": [
+    {
+      "description": "Pin base image digests and auto-merge rebuilds of the same tag (e.g. php:8.4-apache security/patch releases)",
+      "matchManagers": ["dockerfile"],
+      "pinDigests": true
+    },
+    {
+      "matchManagers": ["dockerfile"],
+      "matchUpdateTypes": ["digest", "pinDigest"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": false
+    },
+    {
+      "description": "Group GitHub Actions minor/patch updates (as Dependabot did previously)",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "github actions"
+    }
+  ]
+}
