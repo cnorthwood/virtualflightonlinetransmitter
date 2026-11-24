@@ -1,4 +1,4 @@
-FROM php:8.5-apache@sha256:0a785eab8b7eb4836f9c6093771c8ea15ff8ba7269444f3da70a1d33d15fe664
+FROM php:8.5-apache@sha256:37f2df0c08843e43ee63d0c3ca1c1c406a252720fb74d8f5392a095e6b449134
 
 RUN a2enmod rewrite
 RUN pecl install apcu
