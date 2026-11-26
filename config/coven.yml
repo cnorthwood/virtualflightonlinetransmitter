@@ -2,7 +2,7 @@ ingress:
   hostname: radar.omelette.gay
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
-    traefik.ingress.kubernetes.io/router.middlewares: "kube-system-redirect-https@kubernetescrd,virtualflightonlinetransmitter-virtualflightonlinetransmitter-block-apcu-manager@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "kube-system-redirect-https@kubernetescrd"
   tls:
     - hosts:
         - radar.omelette.gay
